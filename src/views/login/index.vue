@@ -62,21 +62,28 @@ export default {
   },
   methods: {
     login () {
-      this.$refs.loginForm.validate(isOk => {
-        if (isOk) {
-          this.$message({ type: 'success', message: '成功' })
-        } else {
-          this.$message({ type: 'loser', message: '失败' })
-        }
-        // 请求
-        // this.$axios({
-        //   url: '/authorizations',
-        //   method: 'post',
-        //   data: this.loginForm
-        // }).then(result=>{
-
-        // })
+      // this.$refs.loginForm.validate(isOk => {
+      //   if (isOk) {
+      //     this.$message({ type: 'success', message: '成功' })
+      //   } else {
+      //     this.$message({ type: 'loser', message: '失败' })
+      //   }
+      // 请求
+      this.$axios({
+        url: '/authorizations',
+        method: 'post',
+        data: this.loginForm
+      }).then(result => {
+        window.localStorage.setItem('user-token', result.data.data.token)
+        console.log(result.data)
+        this.$router.push('/')
+      }).catch(() => {
+        this.$message({
+          message: '手机号或者验证码错误',
+          type: 'warning'
+        })
       })
+      // })
     }
   }
 }
