@@ -2,7 +2,7 @@
   <div id="app">
       <div class="login">
     <el-card class="box-card">
-      <img src="../assets/logo_index.png" alt="黑马头条" />
+      <img src="../../assets/logo_index.png" alt="黑马头条" />
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
         <el-form-item prop="mobile" >
           <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
@@ -62,12 +62,20 @@ export default {
   },
   methods: {
     login () {
-      this.$refs.loginForm.validate((isOk, obj) => {
+      this.$refs.loginForm.validate(isOk => {
         if (isOk) {
           this.$message({ type: 'success', message: '成功' })
         } else {
           this.$message({ type: 'loser', message: '失败' })
         }
+        // 请求
+        // this.$axios({
+        //   url: '/authorizations',
+        //   method: 'post',
+        //   data: this.loginForm
+        // }).then(result=>{
+
+        // })
       })
     }
   }
@@ -76,7 +84,7 @@ export default {
 
 <style lang='less'>
 .login {
-  background-image: url("../assets/login_bg.jpg");
+  background-image: url("../../assets/login_bg.jpg");
   width: 100%;
   height: 100vh;
   background-size: cover;
