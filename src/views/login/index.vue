@@ -75,7 +75,6 @@ export default {
         data: this.loginForm
       }).then(result => {
         window.localStorage.setItem('user-token', result.data.data.token)
-        console.log(result.data)
         this.$router.push('/')
       }).catch(() => {
         this.$message({
