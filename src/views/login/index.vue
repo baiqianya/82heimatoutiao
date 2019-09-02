@@ -2,7 +2,7 @@
   <div id="app">
       <div class="login">
     <el-card class="box-card">
-      <img src="../../assets/logo_index.png" alt="黑马头条" />
+      <img src="../../assets/img/logo_index.png" alt="黑马头条" />
       <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
         <el-form-item prop="mobile" >
           <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
@@ -75,7 +75,7 @@ export default {
         data: this.loginForm
       }).then(result => {
         window.localStorage.setItem('user-token', result.data.data.token)
-        this.$router.push('/')
+        this.$router.push('/home')
       }).catch(() => {
         this.$message({
           message: '手机号或者验证码错误',
@@ -90,7 +90,7 @@ export default {
 
 <style lang='less'>
 .login {
-  background-image: url("../../assets/login_bg.jpg");
+  background-image: url("../../assets/img/login_bg.jpg");
   width: 100%;
   height: 100vh;
   background-size: cover;
