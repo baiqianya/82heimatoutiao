@@ -7,11 +7,11 @@
           <span>江苏传智播客教育科技股份有限公司</span>
       </el-col>
       <el-col :span="3" class='right'>
-          <img class='head-img' src="../../assets/img/avatar.jpg" alt="">
+          <img class='head-img' :src="userInfo.photo?userInfo.photo:defaultImg" alt="">
      <el-dropdown trigger="click">
          <!-- 匿名插槽 -->
        <span class="el-dropdown-link">
-          82期大神<i class="el-icon-arrow-down el-icon--right"></i>
+          {{userInfo.name}}<i class="el-icon-arrow-down el-icon--right"></i>
        </span>
        <!-- 具名插槽 -->
       <el-dropdown-menu slot="dropdown">
@@ -26,7 +26,26 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      userInfo: {},
+      defaultImg: require('../../assets/img/avatar.jpg')
+    }
+  },
+  methods: {
+    getUserInfo () {
+      let token = window.localStorage.getItem('user-token')
+      this.$axios({
+        url: '/user/profile',
+        headers: { 'authorization': 'Bearer ' + token
+        } }).then(result => {
+        this.userInfo = result.data.data
+      })
+    }
+  },
+  created () {
+    this.getUserInfo()
+  }
 }
 </script>
 
