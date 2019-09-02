@@ -3,7 +3,7 @@
     <!-- 最外层容器 -->
     <el-container>
       <!-- 左侧导航 -->
-      <el-aside width="200px">
+      <el-aside width="200px" style="background:#323745">
         <layout-aside>
         </layout-aside>
       </el-aside>
@@ -15,7 +15,7 @@
           </layout-header>
         </el-header>
         <!-- 主要区域 -->
-        <el-main>
+        <el-main style="margin:0px; padding:0px">
           <router-view></router-view>
         </el-main>
       </el-container>
