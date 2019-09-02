@@ -8,16 +8,16 @@
       </el-col>
       <el-col :span="3" class='right'>
           <img class='head-img' :src="userInfo.photo?userInfo.photo:defaultImg" alt="">
-     <el-dropdown trigger="click">
+     <el-dropdown trigger="click" @command="handleMenuItem">
          <!-- 匿名插槽 -->
        <span class="el-dropdown-link">
           {{userInfo.name}}<i class="el-icon-arrow-down el-icon--right"></i>
        </span>
        <!-- 具名插槽 -->
       <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item >个人信息</el-dropdown-item>
-        <el-dropdown-item>git地址</el-dropdown-item>
-        <el-dropdown-item>退出</el-dropdown-item>
+        <el-dropdown-item command='account'>个人信息</el-dropdown-item>
+        <el-dropdown-item command='git'>git地址</el-dropdown-item>
+        <el-dropdown-item >退出</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
       </el-col>
@@ -41,6 +41,16 @@ export default {
         } }).then(result => {
         this.userInfo = result.data.data
       })
+    },
+    handleMenuItem (command) {
+      if (command === 'account') {
+
+      } else if (command === 'git') {
+        window.location.href = 'https://github.com/shuiruohanyu/82heimatoutiao'
+      } else {
+        window.localStorage.clear()
+        this.$router.push('/login')
+      }
     }
   },
   created () {
