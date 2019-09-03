@@ -34,11 +34,11 @@ export default {
   },
   methods: {
     getUserInfo () {
-      let token = window.localStorage.getItem('user-token')
+      // let token = window.localStorage.getItem('user-token')
       this.$axios({
-        url: '/user/profile',
-        headers: { 'authorization': 'Bearer ' + token
-        } }).then(result => {
+        url: '/user/profile'
+        // headers: { 'authorization': 'Bearer ' + token
+      }).then(result => {
         this.userInfo = result.data.data
       })
     },
