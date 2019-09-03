@@ -39,7 +39,7 @@ export default {
         url: '/user/profile'
         // headers: { 'authorization': 'Bearer ' + token
       }).then(result => {
-        this.userInfo = result.data.data
+        this.userInfo = result.data
       })
     },
     handleMenuItem (command) {
