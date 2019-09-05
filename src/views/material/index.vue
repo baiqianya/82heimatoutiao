@@ -14,6 +14,18 @@
             </el-row>
           </el-card>
         </div>
+        <el-card>
+          <el-row type="flex" justify="space-around">
+            <el-pagination
+              @current-change="changePage"
+              :current-page="page.page"
+              :page-size="page.pageSize"
+              :total="page.total"
+              background
+              layout="prev, pager, next"
+            ></el-pagination>
+          </el-row>
+        </el-card>
       </el-tab-pane>
       <el-tab-pane label="收藏图片" name="collect">
         <div class="card-list">
@@ -21,6 +33,16 @@
             <img :src="item.url" alt />
           </el-card>
         </div>
+        <el-row type="flex" justify="space-around">
+          <el-pagination
+            @current-change="changePage"
+            :current-page="page.page"
+            :page-size="page.pageSize"
+            :total="page.total"
+            background
+            layout="prev, pager, next"
+          ></el-pagination>
+        </el-row>
       </el-tab-pane>
     </el-tabs>
   </el-card>
@@ -31,21 +53,34 @@ export default {
   data () {
     return {
       activeName: 'all',
-      list: []
+      list: [],
+      page: {
+        page: 1,
+        pageSize: 10,
+        total: 0
+      }
     }
   },
   methods: {
+    changePage (newPage) {
+      this.page.page = newPage
+      this.getMaterial()
+    },
     changeTab () {
+      this.page.page = 1
       this.getMaterial()
     },
     getMaterial () {
       this.$axios({
         url: '/user/images',
         params: {
+          page: this.page.page,
+          per_page: this.page.pageSize,
           collect: this.activeName === 'collect'
         }
       }).then(result => {
         this.list = result.data.results
+        this.page.total = result.data.total_count
       })
     }
   },
