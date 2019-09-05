@@ -34,7 +34,7 @@ export default {
         this.$axios({
           methods: 'put',
           url: '/comments/status',
-          params: { article_id: row.id },
+          params: { article_id: row.id.toString() },
           data: { allow_comment: !row.comment_status }
         }).then(result => {
           this.getComments()

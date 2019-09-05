@@ -2,8 +2,13 @@ import axios from 'axios'
 import router from '../permission'
 import { Message } from 'element-ui'
 import { Promise } from 'q'
+import jsonBigInt from 'json-bigint'
 
 axios.defaults.baseURL = 'http://ttapi.research.itcast.cn/mp/v1_0'
+
+axios.defaults.transformResponse = [function (data) {
+  return jsonBigInt.parse(data)
+}]
 
 axios.interceptors.request.use(function (config) {
   let token = window.localStorage.getItem('user-token')
