@@ -3,6 +3,9 @@
     <break-crumb slot="header">
       <template slot="title">素材管理</template>
     </break-crumb>
+    <el-upload :http-request="uploadImg" action="" class="upload-btn">
+      <el-button type="primary">上传图片</el-button>
+    </el-upload>
     <el-tabs v-model="activeName" @tab-click="changeTab">
       <el-tab-pane label="全部素材" name="all">
         <div class="card-list">
@@ -62,6 +65,17 @@ export default {
     }
   },
   methods: {
+    uploadImg (params) {
+      let obj = new FormData()
+      obj.append('image', params.file)
+      this.$axios({
+        url: '/user/images',
+        method: 'post',
+        data: { image: params.file }
+      }).then(() => {
+        this.getMaterial()
+      })
+    },
     collectOrCancel (item) {
       let mess = item.is_collected ? '取消' : ''
       this.$confirm(`您确定要${mess}收藏这张图片吗?`, '提示').then(() => {
@@ -114,6 +128,11 @@ export default {
 
 <style lang="less" scoped>
 .material {
+  .upload-btn{
+    position: absolute;
+    right: 10px;
+    margin-top: -10px;
+  }
   .card-list {
     display: flex;
     flex-wrap: wrap;
