@@ -20,6 +20,9 @@ export default new Router({
       }, {
         path: 'material',
         component: () => import('./views/material')
+      }, {
+        path: 'articles',
+        component: () => import('./views/articles')
       }]
     }, {
       path: '/',

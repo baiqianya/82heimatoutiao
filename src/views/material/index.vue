@@ -132,6 +132,7 @@ export default {
     position: absolute;
     right: 10px;
     margin-top: -10px;
+    z-index: 9999;
   }
   .card-list {
     display: flex;
